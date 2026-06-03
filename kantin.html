@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daftar Menu Mami Snack Semarang</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Daftar Menu Mami Snack Semarang</h1>
+    <div class="user">
+      <span id="clock"></span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="menu-section">
+      <h2>Daftar Menu Jajanan</h2>
+      <div id="menu" class="menu-grid"></div>
+    </section>
+
+    <aside class="cart-section">
+      <h2>Keranjang</h2>
+      <div id="cart-list" class="cart-list"></div>
+
+      <div class="cart-summary">
+        <div>Subtotal: <span id="subtotal">Rp0</span></div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>PPN (0%):</div>
+          <div><span id="tax">Rp0</span></div>
+        </div>
+        <div class="total">Total: <span id="total">Rp0</span></div>
+        <button id="place-order" class="btn primary" disabled>Place Order</button>
+        <button class="btn small" onclick="goToKasir()">
+          Dashboard Kasir
+        </button>
+        <button id="clear-cart" class="btn">Kosongkan</button>
+      </div>
+
+      <hr />
+
+      <h3>Riwayat Pesanan</h3>
+      <div id="history" class="history-list"></div>
+      <button id="clear-history" class="btn small">Hapus Riwayat</button>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <small>Daftar Menu Mami Snack - 2026 </small>
+  </footer>
+
+  <!-- Receipt modal -->
+  <div id="receipt-modal" class="receipt hidden" role="dialog" aria-hidden="true">
+    <h3>STRUK PEMBELIAN</h3>
+    <div id="receipt-body">
+      <div><strong id="receipt-id"></strong></div>
+      <div id="receipt-date" style="color:var(--muted); font-size:0.9rem;"></div>
+      <div id="receipt-items" style="margin-top:10px;"></div>
+      <hr>
+      <div>Subtotal: <span id="r-subtotal"></span></div>
+      <div>PPN: <span id="r-tax"></span></div>
+      <div style="font-weight:800; margin-top:6px;">Total: <span id="r-total"></span></div>
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <button id="close-receipt" class="btn">Tutup</button>
+        <button id="print-receipt" class="btn primary">Cetak (Print)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
