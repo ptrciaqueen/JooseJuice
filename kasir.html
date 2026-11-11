@@ -2,40 +2,40 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kasir - Mami Snack Semarang</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <!-- PAKAI CSS YANG KAMU KIRIM -->
+  <title>Kasir - Joose Juice</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header class="topbar">
   <h2>Dashboard Kasir</h2>
-  <button class="btn small" onclick="logout()">Logout</button>
+  <button class="logout-btn" onclick="logout()">Logout</button>
 </header>
 
 <div class="container">
 
-  <!-- BAGIAN KIRI -->
   <div class="menu-section">
     <h3>Daftar Pesanan Masuk</h3>
 
     <div class="menu-grid" id="pesananGrid">
-      <!-- Pesanan dari localStorage tampil di sini -->
+      <p>TEST HALAMAN KASIR</p>
     </div>
   </div>
 
-
-  <!-- BAGIAN KANAN -->
   <div class="cart-section">
+
     <h3>Ringkasan Transaksi</h3>
 
     <div class="cart-list" id="summaryList">
     </div>
 
     <div class="cart-summary">
-      <div class="total">Total: Rp <span id="totalHarga">0</span></div>
+
+      <div class="total">
+        Total: Rp <span id="totalHarga">0</span>
+      </div>
 
       <button class="btn primary" onclick="cetakStruk()">
         Cetak Struk
@@ -44,30 +44,33 @@
       <button class="btn" onclick="resetPesanan()">
         Hapus Semua Pesanan
       </button>
+
     </div>
 
     <hr>
 
     <h4>Riwayat Transaksi</h4>
+
     <div class="history-list" id="historyList">
+      <p>Belum ada transaksi</p>
     </div>
 
   </div>
 
-</div>
-
-<footer class="footer">
-  Kantin Digital • Mode Kasir
-</footer>
-
-<!-- MODAL STRUK -->
 <div id="receipt" class="receipt hidden">
   <h3>Struk Pembelian</h3>
   <div id="receiptContent"></div>
-  <button class="btn primary" onclick="printStruk()">Print</button>
-  <button class="btn" onclick="closeStruk()">Tutup</button>
+
+  <button class="btn primary" onclick="printStruk()">
+    Print
+  </button>
+
+  <button class="btn" onclick="closeStruk()">
+    Tutup
+  </button>
 </div>
 
 <script src="kasir.js"></script>
+
 </body>
 </html>

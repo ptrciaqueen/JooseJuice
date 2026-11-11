@@ -1,0 +1,14 @@
+{
+  "name": "joose-juice",
+  "version": "1.0.0",
+  "description": "Sistem Kasir Joose Juice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}

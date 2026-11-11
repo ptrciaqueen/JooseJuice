@@ -2,19 +2,24 @@
 // DATA MENU
 // ===========================
 const MENU = [
-  { id: 'Risol_Mayo_Smoke_Beef', name: 'Risol Mayo Smoke Beef', price: 2000, desc: 'Camilan risol berisi smoke beef, mayonais, dan telor rebus' },
-  { id: 'Risol_Matcha', name: 'Risol Matcha', price: 2000, desc: 'Camilan risol dengan varian matcha kekinian berisi krim fla matcha' },
-  { id: 'Bolu Karamel', name: 'Bolu Karamel', price: 1800, desc: 'Kue tradisional bertekstur kenyal, lembut, dan memiliki rongga-rongga unik menyerupai sarang semut di bagian dalamnya dan beraroma harum karamel' },
-  { id: 'Dadar_Gulung_Hijau', name: 'Dadar Gulung Hijau', price: 1200, desc: 'Kelapa parut dan gula aren dibungkus dengan telur dadar tipis yang terbuat dari tepung beras dan diwarnai hijau dengan pandan' },
-  { id: 'Martabak', name: 'Martabak', price: 1200, desc: 'Gorengan gurih mini berisi adonan telur, daging, dan daun bawang' },
-  { id: 'Sosis_Solo', name: 'Sosis Solo', price: 1500, desc: 'Jajanan tradisional khas Kota Solo yang menyerupai risoles, namun memiliki kulit yang lebih lembut dan isian daging ayam suwir yang padat' },
-  { id: 'Pestuban', name: 'Pestuban', price: 1500, desc: 'Jajanan tradisional Nusantara yang manis dan lembut dan berbahan dasar potongan pisang' },
-  { id: 'Puding', name: 'Puding', price: 2500, desc: 'Hidangan penutup (dessert) yang menggabungkan puding berbahan dasar susu dan cokelat dengan tekstur kenyal dan lembut, disiram saus vla vanila yang creamy dan manis' },
-  { id: 'Wingko_Babat', name: 'Wingko Babat', price: 2500, desc: 'Kue tradisional Indonesia yang terbuat dari campuran kelapa parut, tepung ketan, dan gula' },
-  { id: 'Bolen_Pisang', name: 'Bolen Pisang', price: 3500, desc: 'Kue ini terdiri dari potongan buah pisang yang dibalut dengan adonan pastry berlapis (renyah di luar dan lembut di dalam), serta diberi isian tambahan seperti keju, cokelat, atau kacang sebelum dipanggang' },
-  { id: 'Dimsum_Ayam', name: 'Dimsum Ayam', price: 3500, desc: 'Hidangan ringan berupa adonan daging ayam cincang yang dicampur tepung tapioka, bumbu, dan sayuran seperti wortel, dibungkus kulit pangsit' },
-  { id: 'Cendol_Keju', name: 'Cendol Keju', price: 1000, desc: 'Camilan kering tradisional Indonesia yang bercita rasa asin, gurih, dan renyah' },
-  { id: 'Kerupuk_Ikan', name: 'Kerupuk Ikan', price: 1000, desc: 'Camilan atau makanan pelengkap renyah khas Asia Tenggara yang terbuat dari adonan tepung tapioka/sagu dan daging ikan giling' }
+  { id: 'Golden_Rise', name: 'Golden Rise', price: 15000, desc: 'Signature blend of Carrot,Apple,and Pineapple' },
+  { id: 'Pine_Apple', name: 'Pine Apple', price: 15000, desc: 'Pure duo Pineapple and Apple' },
+  { id: 'Green_Pulse', name: 'Green Pulse', price: 15000, desc: 'Cucumber meets Pineapple and Kiwi' },
+  { id: 'Sunkist', name: 'Sunkist Juice', price: 15000, desc: 'Fresh Orange Sunkist Juice' },
+  { id: 'Semangka', name: 'Semangka', price: 13000, desc: 'Fresh Watermelon Juice' },
+  { id: 'Nanas', name: 'Nanas', price: 13000, desc: 'Fresh Pineapple Juice' },
+  { id: 'Mangga', name: 'Mangga', price: 13000, desc: 'Fresh Manggo Juice' },
+  { id: 'Apel', name: 'Apel', price: 13000, desc: 'Fresh Apple Juice' },
+  { id: 'Alpukat', name: 'Alpukat', price: 13000, desc: 'Fresh Avacado Juice' },
+  { id: 'Melon', name: 'Melon', price: 13000, desc: 'Fresh Honeydew Juice' },
+  { id: 'Buah_Naga', name: 'Buah Naga', price: 13000, desc: 'Fresh Dragon Fruit Juice' },
+  { id: 'Lemon', name: 'Lemon', price: 13000, desc: 'Fresh Lemon Juice' },
+  { id: 'Wortel', name: 'Wortel', price: 13000, desc: 'Fresh Carrot Juice' },
+  { id: 'Sun_Drift', name: 'Sun Drift', price: 17000, desc: 'Sunkist and Apple Fusion' },
+  { id: 'Neon_Gut', name: 'Neon Gut', price: 17000, desc: 'Sunkist x Yakult creamy crush' },
+  { id: 'Honey_Rush', name: 'Honey Rush', price: 17000, desc: 'Sunkist infusued with honey' },
+  { id: 'Mix_Jus_Suka_-_Suka', name: 'Mix Jus Suka-Suka', price: 15000, desc: 'Create your own blended' },
+  { id: 'Cup_Large', name: 'Charge Large Cup', price: 3000, desc: 'Charge Large Cup' }
 ];
 
 // ===========================
@@ -148,33 +153,247 @@ function removeItem(index) {
 }
 
 // ===========================
+// GENERATE NOMOR TRANSAKSI
+// ===========================
+
+function generateNomorTransaksi() {
+
+  let nomorTerakhir = Number(
+    localStorage.getItem("nomorTransaksiTerakhir") || 0
+  );
+
+  nomorTerakhir++;
+
+  localStorage.setItem(
+    "nomorTransaksiTerakhir",
+    nomorTerakhir
+  );
+
+  return String(nomorTerakhir).padStart(3, "0");
+}
+
+
+// ===========================
+// HITUNG ESTIMASI SELESAI
+// ===========================
+
+function hitungEstimasi(waktuPesan, menit) {
+
+  const waktu = new Date(waktuPesan);
+
+  waktu.setMinutes(
+    waktu.getMinutes() + Number(menit)
+  );
+
+  return waktu.toLocaleTimeString(
+    "id-ID",
+    {
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+}
+
+
+// ===========================
 // PLACE ORDER -> KASIR
 // ===========================
+
 btnOrder.addEventListener("click", () => {
-  if (cart.length === 0) return;
+
+  if (cart.length === 0) {
+
+    alert("Keranjang kosong!");
+
+    return;
+  }
+
+
+  // ===========================
+  // AMBIL NAMA CUSTOMER
+  // ===========================
+
+  const customerName =
+    document.getElementById(
+      "customer-name"
+    ).value.trim();
+
+
+  if (!customerName) {
+
+    alert(
+      "Silakan masukkan nama customer terlebih dahulu!"
+    );
+
+    document.getElementById(
+      "customer-name"
+    ).focus();
+
+    return;
+  }
+
+
+  // ===========================
+  // AMBIL ESTIMASI
+  // ===========================
+
+  const estimateMinutes =
+    document.getElementById(
+      "estimate-time"
+    ).value;
+
+
+  // ===========================
+  // HITUNG TOTAL
+  // ===========================
+
+  const subtotal = cart.reduce(
+    (total, item) =>
+      total + (item.price * item.qty),
+    0
+  );
+
+
+  const tax = 0;
+
+  const total =
+    subtotal + tax;
+
+
+  // ===========================
+  // WAKTU PESAN
+  // ===========================
+
+  const waktuPesan =
+    new Date();
+
+
+  const waktuSelesai =
+    hitungEstimasi(
+      waktuPesan,
+      estimateMinutes
+    );
+
+
+  // ===========================
+  // NOMOR TRANSAKSI
+  // ===========================
+
+  const nomorTransaksi =
+    generateNomorTransaksi();
+
+
+  // ===========================
+  // BUAT PESANAN
+  // ===========================
 
   const order = {
-    id: "ORD-" + Date.now(),
-    waktu: new Date().toLocaleString("id-ID"),
-    items: cart,
-    total: totalEl.innerText.replace("Rp ", "").replace(/\./g, "")
+
+    id: nomorTransaksi,
+
+    customer:
+      customerName,
+
+    waktu:
+      waktuPesan.toLocaleString(
+        "id-ID"
+      ),
+
+    waktuSelesai:
+      waktuSelesai,
+
+    estimasiMenit:
+      Number(estimateMinutes),
+
+    items:
+      [...cart],
+
+    subtotal:
+      subtotal,
+
+    tax:
+      tax,
+
+    total:
+      total,
+
+    status:
+      "Menunggu"
+
   };
 
-  // Simpan ke kasir
-  let pesananKasir = JSON.parse(localStorage.getItem("pesananKasir") || "[]");
+
+  // ===========================
+  // KIRIM KE KASIR
+  // ===========================
+
+  let pesananKasir =
+    JSON.parse(
+      localStorage.getItem(
+        "pesananKasir"
+      )
+    ) || [];
+
+
   pesananKasir.push(order);
-  localStorage.setItem("pesananKasir", JSON.stringify(pesananKasir));
 
-  // Simpan ke riwayat pelanggan
+
+  localStorage.setItem(
+    "pesananKasir",
+    JSON.stringify(
+      pesananKasir
+    )
+  );
+
+
+  // ===========================
+  // SIMPAN HISTORY CUSTOMER
+  // ===========================
+
   history.push(order);
-  localStorage.setItem("history", JSON.stringify(history));
 
-  alert("Pesanan berhasil dikirim ke kasir ✅");
+
+  localStorage.setItem(
+    "history",
+    JSON.stringify(
+      history
+    )
+  );
+
+
+  // ===========================
+  // RESET CART
+  // ===========================
 
   cart = [];
+
   saveCart();
-  renderCart();
-  tampilHistory();
+
+
+  // ===========================
+  // INFORMASI PESANAN
+  // ===========================
+
+  alert(
+    "Pesanan berhasil dibuat!\n\n" +
+    "No. Transaksi : " +
+    nomorTransaksi +
+    "\n" +
+    "Customer : " +
+    customerName +
+    "\n" +
+    "Estimasi selesai : " +
+    waktuSelesai
+  );
+
+
+  // ===========================
+  // PINDAH KE KASIR
+  // ===========================
+
+  window.location.href =
+    "kasir.html";
+
 });
 
 // ===========================
@@ -239,16 +458,28 @@ setInterval(updateClock, 1000);
 
 
 // ===========================
-// NAVIGATION
-// ===========================
-function goToKasir() {
-  window.location.href = 'kasir.html';
-}
-
-// ===========================
 // INITIAL LOAD
 // ===========================
 displayMenu();
 renderCart();
 tampilHistory();
 updateClock();
+
+document.getElementById("print-receipt").addEventListener("click", function() {
+
+  // Ambil data struk
+  const receiptData = {
+    id: document.getElementById("receipt-id").innerText,
+    date: document.getElementById("receipt-date").innerText,
+    items: document.getElementById("receipt-items").innerHTML,
+    subtotal: document.getElementById("r-subtotal").innerText,
+    tax: document.getElementById("r-tax").innerText,
+    total: document.getElementById("r-total").innerText
+  };
+
+  // Simpan ke localStorage
+  localStorage.setItem("receiptData", JSON.stringify(receiptData));
+
+  // Pindah ke halaman struk
+  window.location.href = "struk.html";
+});

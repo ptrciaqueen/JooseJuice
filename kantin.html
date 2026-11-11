@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Daftar Menu Mami Snack Semarang</title>
+  <title>Daftar Menu Joose Juice</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="topbar">
-    <h1>Daftar Menu Mami Snack Semarang</h1>
+    <h1>Daftar Menu Joose Juice</h1>
     <div class="user">
       <span id="clock"></span>
     </div>
@@ -16,7 +16,7 @@
 
   <main class="container">
     <section class="menu-section">
-      <h2>Daftar Menu Jajanan</h2>
+      <h2>Daftar Minuman Joose Juice </h2>
       <div id="menu" class="menu-grid"></div>
     </section>
 
@@ -31,9 +31,63 @@
           <div><span id="tax">Rp0</span></div>
         </div>
         <div class="total">Total: <span id="total">Rp0</span></div>
-        <button id="place-order" class="btn primary" disabled>Place Order</button>
-        <button class="btn small" onclick="goToKasir()">
-          Dashboard Kasir
+
+        <hr>
+
+        <h3>Informasi Pesanan</h3>
+
+        <div style="margin-bottom:10px;">
+          <label for="customer-name">
+            <strong>Nama Customer</strong>
+          </label>
+
+          <input
+            type="text"
+            id="customer-name"
+            placeholder="Masukkan nama customer"
+            style="
+              width:100%;
+              padding:10px;
+              margin-top:5px;
+              box-sizing:border-box;
+            "
+          >
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label for="estimate-time">
+            <strong>Estimasi Selesai</strong>
+          </label>
+
+          <select
+            id="estimate-time"
+            style="
+              width:100%;
+              padding:10px;
+              margin-top:5px;
+              box-sizing:border-box;
+            "
+          >
+            <option value="10">10 menit</option>
+            <option value="15" selected>15 menit</option>
+            <option value="20">20 menit</option>
+            <option value="30">30 menit</option>
+          </select>
+        </div>
+
+        <div
+          id="estimated-result"
+          style="
+            margin-bottom:10px;
+            font-weight:bold;
+            color:#2878ff;
+          "
+        >
+          Estimasi selesai akan muncul setelah pesanan dibuat.
+        </div>
+
+        <button id="place-order" class="btn primary">
+          Place Order
         </button>
         <button id="clear-cart" class="btn">Kosongkan</button>
       </div>
@@ -47,7 +101,7 @@
   </main>
 
   <footer class="footer">
-    <small>Daftar Menu Mami Snack - 2026 </small>
+    <small>Daftar Menu Joose Juice - 2026 </small>
   </footer>
 
   <!-- Receipt modal -->

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Struk Pembelian Joose Juice</title>
+
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .receipt {
+      width: 300px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .line {
+      border-top: 1px dashed #000;
+      margin: 12px 0;
+    }
+
+    .info {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .item {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .item-total {
+      text-align: right;
+    }
+
+    .total {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .print {
+      background: #2878ff;
+      color: white;
+    }
+
+    .back {
+      background: #ddd;
+    }
+
+    @media print {
+
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .receipt {
+        width: 300px;
+        margin: 0;
+        padding: 10px;
+      }
+
+      .buttons {
+        display: none;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="receipt">
+
+  <h2>Joose Juice</h2>
+
+  <div class="center">
+    <small>Universitas Semarang</small>
+  </div>
+
+  <div class="line"></div>
+
+  <div class="info">
+
+    <div>
+      No. Transaksi:
+      <strong id="receipt-id">-</strong>
+    </div>
+
+    <div>
+      Customer:
+      <strong id="receipt-customer">-</strong>
+    </div>
+
+    <div>
+      Waktu:
+      <span id="receipt-date">-</span>
+    </div>
+
+    <div>
+      Estimasi selesai:
+      <strong id="receipt-estimate">-</strong>
+    </div>
+
+  </div>
+
+  <div class="line"></div>
+
+  <div id="receipt-items">
+  </div>
+
+  <div class="line"></div>
+
+  <div>
+    Subtotal:
+    <span id="subtotal">Rp0</span>
+  </div>
+
+  <div>
+    PPN:
+    <span id="tax">Rp0</span>
+  </div>
+
+  <div class="total">
+    Total:
+    <span id="total">Rp0</span>
+  </div>
+
+  <div class="line"></div>
+
+  <div class="center">
+    <small>
+      Terima kasih telah berbelanja
+    </small>
+  </div>
+
+  <div class="buttons">
+
+    <button
+      class="back"
+      onclick="kembaliKasir()">
+      Kembali
+    </button>
+
+    <button
+      class="print"
+      onclick="window.print()">
+      Cetak
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  // ==========================================
+  // AMBIL DATA STRUK
+  // ==========================================
+
+  const data =
+    JSON.parse(
+      localStorage.getItem("receiptData") || "null"
+    );
+
+
+  // ==========================================
+  // CEK DATA
+  // ==========================================
+
+  if (!data) {
+
+    document.querySelector(".receipt").innerHTML = `
+
+      <h2>Data struk tidak ditemukan</h2>
+
+      <p class="center">
+        Silakan kembali ke halaman kasir.
+      </p>
+
+      <button
+        onclick="kembaliKasir()">
+        Kembali ke Kasir
+      </button>
+
+    `;
+
+  } else {
+
+
+    // ========================================
+    // INFORMASI TRANSAKSI
+    // ========================================
+
+    document.getElementById(
+      "receipt-id"
+    ).textContent =
+      data.id || "-";
+
+
+    document.getElementById(
+      "receipt-customer"
+    ).textContent =
+      data.customer || "-";
+
+
+    document.getElementById(
+      "receipt-date"
+    ).textContent =
+      data.date || "-";
+
+
+    document.getElementById(
+      "receipt-estimate"
+    ).textContent =
+      data.estimate || "-";
+
+
+    // ========================================
+    // ITEM PESANAN
+    // ========================================
+
+    const itemsContainer =
+      document.getElementById(
+        "receipt-items"
+      );
+
+    itemsContainer.innerHTML = "";
+
+
+    if (
+      Array.isArray(data.items) &&
+      data.items.length > 0
+    ) {
+
+      data.items.forEach(item => {
+
+        const price =
+          Number(item.price || 0);
+
+        const qty =
+          Number(item.qty || 0);
+
+        const subtotal =
+          price * qty;
+
+
+        const div =
+          document.createElement("div");
+
+        div.className = "item";
+
+        div.innerHTML = `
+
+          <div>
+            <strong>
+              ${item.name || "Item"}
+            </strong>
+          </div>
+
+          <div>
+            ${qty} x
+            Rp ${price.toLocaleString("id-ID")}
+          </div>
+
+          <div class="item-total">
+            Rp ${subtotal.toLocaleString("id-ID")}
+          </div>
+
+        `;
+
+        itemsContainer.appendChild(div);
+
+      });
+
+    } else {
+
+      itemsContainer.innerHTML =
+        "<p>Tidak ada item.</p>";
+
+    }
+
+
+    // ========================================
+    // TOTAL
+    // ========================================
+
+    document.getElementById(
+      "subtotal"
+    ).textContent =
+      "Rp " +
+      Number(
+        data.subtotal || 0
+      ).toLocaleString("id-ID");
+
+
+    document.getElementById(
+      "tax"
+    ).textContent =
+      "Rp " +
+      Number(
+        data.tax || 0
+      ).toLocaleString("id-ID");
+
+
+    document.getElementById(
+      "total"
+    ).textContent =
+      "Rp " +
+      Number(
+        data.total || 0
+      ).toLocaleString("id-ID");
+
+  }
+
+
+  // ==========================================
+  // KEMBALI KE KASIR
+  // ==========================================
+
+  function kembaliKasir() {
+
+    window.location.href =
+      "kasir.html";
+
+  }
+
+</script>
+
+</body>
+
+</html>

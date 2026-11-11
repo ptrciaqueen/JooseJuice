@@ -1,140 +1,1342 @@
-:root{
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --accent:#2b8aef;
-  --muted:#6b7280;
-  --success:#10b981;
-  --danger:#ef4444;
-  --shadow: 0 6px 18px rgba(36,37,38,0.08);
-  --radius:12px;
-  --gap:16px;
-  font-family: Inter, ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-}
-*{box-sizing:border-box}
-body{
-  margin:0; background:var(--bg); color:#111827; min-height:100vh; display:flex; flex-direction:column;
-}
-.topbar{
-  background:linear-gradient(90deg,#0ea5e9 0%, #2563eb 100%);
-  color:white; padding:18px 20px; display:flex; justify-content:space-between; align-items:center;
-  box-shadow: var(--shadow);
-}
-.container{
-  display:grid; grid-template-columns: 1fr 340px; gap:var(--gap); padding:20px; width:100%; max-width:1200px; margin:18px auto;
-}
-.menu-section{
-  background:var(--card); padding:18px; border-radius:var(--radius); box-shadow:var(--shadow);
-}
-.menu-grid{
-  display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin-top:12px;
-}
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,250,1));
-  border-radius:10px; padding:12px; box-shadow:0 4px 10px rgba(0,0,0,0.04); display:flex; flex-direction:column; gap:8px;
-}
-.card h4{margin:0;font-size:1rem}
-.card p{margin:0;color:var(--muted); font-size:0.9rem}
-.price{font-weight:700}
-.btn{
-  padding:8px 10px; border-radius:8px; border:0; cursor:pointer; background:#e6eefc; color:#064e9b;
-  pointer-events:auto;
-}
-.btn.primary{background:var(--accent); color:white}
-.btn.small{padding:6px 8px; font-size:0.85rem}
-.card .meta{display:flex; justify-content:space-between; align-items:center}
-.qty-control{display:flex; gap:6px; align-items:center}
-.qty-control button{padding:6px 8px; border-radius:6px; border:1px solid #e2e8f0; background:white; cursor:pointer}
-.card button{z-index:2; position:relative}
-.cart-section{
-  background:var(--card); padding:16px; border-radius:12px; box-shadow:var(--shadow); height:fit-content;
-}
-.cart-list{display:flex; flex-direction:column; gap:10px; max-height:320px; overflow:auto; margin-bottom:10px}
-.cart-item{display:flex; justify-content:space-between; gap:8px; align-items:center; padding:8px; border-radius:8px; background:#fbfdff}
-.cart-item .meta{flex:1}
-.cart-summary{display:flex; flex-direction:column; gap:8px; margin-top:10px}
-.total{font-weight:800; font-size:1.1rem}
-.history-list{max-height:180px; overflow:auto; margin-top:8px; display:flex; flex-direction:column; gap:8px}
-.history-item{background:#f3f4f6; padding:8px; border-radius:8px; font-size:0.95rem; display:flex; justify-content:space-between; align-items:center}
-.footer{padding:12px; text-align:center; color:var(--muted); margin-top:auto}
-@media (max-width:900px){
-  .container{grid-template-columns:1fr; padding:12px}
-  .cart-section{order:2}
-  .menu-section{order:1}
+/* =====================================================
+   MAMI JUICE BOOTH
+   TEMA ORANYE + PUTIH
+   ===================================================== */
+
+:root {
+  --orange: #ff7a00;
+  --orange-dark: #e85d00;
+  --orange-light: #fff1e3;
+  --orange-soft: #fff8f2;
+
+  --white: #ffffff;
+  --cream: #fffaf5;
+
+  --text: #333333;
+  --muted: #777777;
+
+  --border: #f0d8c2;
+  --shadow: 0 8px 24px rgba(255, 122, 0, 0.12);
+
+  --radius: 14px;
 }
 
-/* Receipt modal */
-.receipt{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:var(--card);
-  padding:18px;
-  border-radius:12px;
-  box-shadow:0 12px 40px rgba(0,0,0,0.25);
-  width:320px;
-  z-index:9999;
-}
-.receipt.hidden{display:none;}
 
+/* =====================================================
+   RESET
+   ===================================================== */
 
-/* =============== LOGIN STYLE (IKUT GAYA KANTIN) =============== */
-
-.login-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--text);
   min-height: 100vh;
-  background: #f4f6f9;  /* samakan dengan background kantin */
-  font-family: Arial, sans-serif;
+}
+
+
+/* =====================================================
+   TOPBAR
+   ===================================================== */
+
+.topbar {
+  background: var(--orange);
+  color: var(--white);
+
+  padding: 18px 30px;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.login-box {
-  width: 380px;
-  padding: 30px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  text-align: center;
+.topbar h1,
+.topbar h2 {
+  font-size: 24px;
+  font-weight: 800;
 }
 
-.login-box h2 {
-  margin-bottom: 25px;
-  color: #2b7cff;  /* samakan warna utama kantin */
+.topbar .user {
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.login-box input {
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.container {
+  width: 92%;
+  max-width: 1200px;
+
+  margin: 30px auto;
+
+  display: grid;
+  grid-template-columns: 1fr 350px;
+
+  gap: 25px;
+}
+
+
+/* =====================================================
+   SECTION
+   ===================================================== */
+
+.menu-section,
+.cart-section {
+  background: var(--white);
+
+  border-radius: var(--radius);
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow);
+}
+
+.menu-section h2,
+.menu-section h3,
+.cart-section h2,
+.cart-section h3,
+.cart-section h4 {
+  color: var(--orange-dark);
+
+  margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   MENU GRID
+   ===================================================== */
+
+.menu-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(180px, 1fr));
+
+  gap: 18px;
+}
+
+
+/* =====================================================
+   MENU CARD
+   ===================================================== */
+
+.card {
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  padding: 18px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--orange);
+
+  box-shadow:
+    0 10px 25px rgba(255, 122, 0, 0.16);
+}
+
+
+/* Nama produk */
+
+.card strong {
+  color: var(--text);
+}
+
+
+/* Harga */
+
+.card .price {
+  color: var(--orange-dark);
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  margin-top: 8px;
+}
+
+
+/* =====================================================
+   PRODUCT / MENU IMAGE
+   ===================================================== */
+
+.menu-image {
   width: 100%;
-  padding: 12px;
-  margin: 12px 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 15px;
+
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  margin-bottom: 12px;
+
+  background: var(--orange-light);
 }
 
-.login-box button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  border-radius: 10px;
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.btn {
   border: none;
-  background: #2b7cff;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+
+  background: #eeeeee;
+
+  color: var(--text);
+
+  padding: 10px 16px;
+
+  border-radius: 9px;
+
   cursor: pointer;
+
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Tombol utama */
+
+.btn.primary {
+  background: var(--orange);
+
+  color: var(--white);
+}
+
+.btn.primary:hover {
+  background: var(--orange-dark);
+}
+
+
+/* Tombol kecil */
+
+.btn.small {
+  padding: 7px 12px;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   CART
+   ===================================================== */
+
+.cart-section {
+  position: sticky;
+
+  top: 20px;
+
+  height: fit-content;
+}
+
+.cart-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+
+/* Item cart */
+
+.cart-item {
+  background: var(--orange-soft);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  padding: 12px;
+}
+
+
+/* =====================================================
+   CART SUMMARY
+   ===================================================== */
+
+.cart-summary {
+  background: var(--orange-light);
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border);
+}
+
+.cart-summary > div {
+  margin-bottom: 10px;
+}
+
+.cart-summary .total {
+  color: var(--orange-dark);
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+  border-top: 1px dashed var(--orange);
+
+  padding-top: 12px;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+input,
+select,
+textarea {
+  width: 100%;
+
+  padding: 11px 13px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 9px;
+
+  background: var(--white);
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--orange);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 122, 0, 0.12);
+}
+
+
+/* =====================================================
+   ORDER INFORMATION
+   ===================================================== */
+
+.order-info {
+  background: var(--orange-soft);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  margin-bottom: 18px;
+}
+
+.order-info label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-weight: 700;
+
+  color: var(--orange-dark);
+}
+
+
+/* =====================================================
+   HISTORY
+   ===================================================== */
+
+.history-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.history-list .card {
+  padding: 13px;
+
+  background: var(--orange-soft);
+}
+
+
+/* =====================================================
+   RECEIPT
+   ===================================================== */
+
+.receipt {
+  position: fixed;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 360px;
+
+  max-width: 90%;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: var(--white);
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.25);
+
+  border-top: 6px solid var(--orange);
+
+  z-index: 999;
+}
+
+.receipt h3 {
+  text-align: center;
+
+  color: var(--orange-dark);
+
+  margin-bottom: 15px;
+}
+
+
+/* Sembunyikan */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer {
+  margin-top: 40px;
+
+  background: var(--orange);
+
+  color: var(--white);
+
+  text-align: center;
+
+  padding: 18px;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   DIVIDER
+   ===================================================== */
+
+hr {
+  border: none;
+
+  border-top: 1px dashed var(--border);
+
+  margin: 20px 0;
+}
+
+
+/* =====================================================
+   RESPONSIVE TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-section {
+    position: static;
+  }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE HP
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .topbar {
+    padding: 15px;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    text-align: center;
+  }
+
+  .topbar h1,
+  .topbar h2 {
+    font-size: 20px;
+  }
+
+  .container {
+    width: 94%;
+
+    margin: 20px auto;
+
+    gap: 15px;
+  }
+
+  .menu-section,
+  .cart-section {
+    padding: 18px;
+  }
+
+  .menu-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 10px;
+  }
+
+  .menu-image {
+    height: 110px;
+  }
+
+}
+
+
+/* =====================================================
+   PRINT
+   ===================================================== */
+
+@media print {
+
+  body {
+    background: white;
+  }
+
+  .topbar,
+  .footer,
+  .btn {
+    display: none !important;
+  }
+
+  .receipt {
+    position: static;
+
+    transform: none;
+
+    width: 300px;
+
+    max-width: none;
+
+    box-shadow: none;
+
+    border: none;
+
+    margin: 0 auto;
+
+    padding: 10px;
+  }
+
+}
+
+/* =====================================================
+   LOGIN JOOSE JUICE
+   TEMA ORANYE + PUTIH + BUAH
+   ===================================================== */
+
+.login-page {
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #fff3e6 0%,
+      #ffffff 45%,
+      #fff8f1 100%
+    );
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+
+/* =====================================================
+   LOGIN CONTAINER
+   ===================================================== */
+
+.login-container {
+
+  width: 900px;
+  max-width: 95%;
+
+  min-height: 550px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  background: white;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(230, 100, 0, 0.18);
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =====================================================
+   BAGIAN BRAND
+   ===================================================== */
+
+.login-brand {
+
+  background:
+    linear-gradient(
+      145deg,
+      #ff8a00,
+      #ff6a00
+    );
+
+  color: white;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 40px;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+/* Lingkaran dekorasi */
+
+.login-brand::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.12);
+
+  top: -120px;
+  left: -100px;
+}
+
+
+.login-brand::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 250px;
+  height: 250px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.10);
+
+  bottom: -100px;
+  right: -80px;
+}
+
+
+/* =====================================================
+   LOGO / GELAS JUS
+   ===================================================== */
+
+.juice-cup {
+
+  width: 130px;
+
+  height: 170px;
+
+  position: relative;
+
+  margin-bottom: 20px;
+}
+
+
+/* Gelas */
+
+.juice {
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 15px;
+
+  width: 100px;
+
+  height: 125px;
+
+  border-radius:
+    10px 10px 25px 25px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffb13b,
+      #ff6b00
+    );
+
+  border:
+    4px solid rgba(255,255,255,0.8);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 38px;
+
+  box-shadow:
+    0 12px 25px rgba(130,50,0,0.25);
+}
+
+
+/* Tutup gelas */
+
+.cup-lid {
+
+  position: absolute;
+
+  width: 110px;
+
+  height: 18px;
+
+  left: 10px;
+
+  top: 35px;
+
+  border-radius: 20px;
+
+  background: white;
+
+  z-index: 3;
+}
+
+
+/* Sedotan */
+
+.straw {
+
+  position: absolute;
+
+  width: 8px;
+
+  height: 75px;
+
+  background: white;
+
+  transform:
+    rotate(12deg);
+
+  left: 78px;
+
+  top: -5px;
+
+  border-radius: 10px;
+
+  z-index: 4;
+}
+
+
+/* =====================================================
+   BRAND TEXT
+   ===================================================== */
+
+.login-brand h1 {
+
+  font-size: 42px;
+
+  margin: 5px 0;
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+.login-brand > p {
+
+  font-size: 16px;
+
+  opacity: 0.9;
+
+  margin: 5px 0 20px;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* =====================================================
+   BUAH
+   ===================================================== */
+
+.fruit-row {
+
+  font-size: 28px;
+
+  letter-spacing: 8px;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* =====================================================
+   FLOATING FRUIT
+   ===================================================== */
+
+.fruit {
+
+  position: absolute;
+
+  font-size: 45px;
+
+  z-index: 1;
+
+  opacity: 0.9;
+
+  animation:
+    floatingFruit 4s ease-in-out infinite;
+}
+
+
+.fruit-orange {
+
+  top: 8%;
+
+  left: 8%;
+
+  animation-delay: 0s;
+}
+
+
+.fruit-lemon {
+
+  top: 12%;
+
+  right: 8%;
+
+  animation-delay: 1s;
+}
+
+
+.fruit-strawberry {
+
+  bottom: 10%;
+
+  left: 8%;
+
+  animation-delay: 1.5s;
+}
+
+
+.fruit-watermelon {
+
+  bottom: 8%;
+
+  right: 10%;
+
+  animation-delay: 2s;
+}
+
+
+.fruit-grape {
+
+  top: 50%;
+
+  right: 3%;
+
+  font-size: 35px;
+
+  animation-delay: 2.5s;
+}
+
+
+@keyframes floatingFruit {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0)
+      rotate(0deg);
+
+  }
+
+  50% {
+
+    transform:
+      translateY(-12px)
+      rotate(8deg);
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGIN CARD
+   ===================================================== */
+
+.login-card {
+
+  padding: 55px 50px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  background: white;
+}
+
+
+/* =====================================================
+   LOGIN HEADER
+   ===================================================== */
+
+.login-header {
+
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+
+.login-icon {
+
+  width: 65px;
+
+  height: 65px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 20px;
+
+  background: #fff1e5;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 32px;
+}
+
+
+.login-header h2 {
+
+  margin: 0;
+
+  color: #333;
+
+  font-size: 29px;
+}
+
+
+.login-header p {
+
+  margin-top: 8px;
+
+  color: #888;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+.input-group {
+
+  margin-bottom: 20px;
+}
+
+
+.input-group label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #444;
+}
+
+
+.input-wrapper {
+
+  position: relative;
+}
+
+
+.input-icon {
+
+  position: absolute;
+
+  left: 14px;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  font-size: 18px;
+}
+
+
+.input-wrapper input {
+
+  width: 100%;
+
+  height: 50px;
+
+  padding:
+    0 15px 0 45px;
+
+  border:
+    1px solid #eadbd0;
+
+  border-radius: 12px;
+
+  background: #fffaf6;
+
+  color: #333;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s;
+
+  box-sizing: border-box;
+}
+
+
+.input-wrapper input:focus {
+
+  border-color: #ff7a00;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(255,122,0,0.10);
+}
+
+
+.input-wrapper input::placeholder {
+
+  color: #aaa;
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+   ===================================================== */
+
+.login-button {
+
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff8a00,
+      #ff6800
+    );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 18px
+    rgba(255,105,0,0.22);
+
   transition: 0.2s;
 }
 
-.login-box button:hover {
-  background: #1a5fd1;
-  transform: scale(0.98);
+
+.login-button:hover {
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 12px 25px
+    rgba(255,105,0,0.30);
 }
 
-#error {
-  color: red;
-  margin-top: 10px;
-  font-size: 14px;
+
+.login-button:active {
+
+  transform:
+    translateY(0);
+}
+
+
+/* =====================================================
+   LOGIN FOOTER
+   ===================================================== */
+
+.login-footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 30px;
+
+  color: #999;
+
+  font-size: 12px;
+}
+
+
+.login-footer p {
+
+  margin: 0;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 750px) {
+
+  .login-container {
+
+    grid-template-columns: 1fr;
+
+    max-width: 430px;
+
+    min-height: auto;
+
+  }
+
+
+  .login-brand {
+
+    padding: 30px 20px;
+
+    min-height: 300px;
+
+  }
+
+
+  .juice-cup {
+
+    transform: scale(0.75);
+
+    margin-bottom: 0;
+
+  }
+
+
+  .login-brand h1 {
+
+    font-size: 32px;
+
+  }
+
+
+  .login-card {
+
+    padding: 35px 25px;
+
+  }
+
+
+  .fruit {
+
+    font-size: 32px;
+
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .login-page {
+
+    padding: 10px;
+
+  }
+
+
+  .login-container {
+
+    width: 100%;
+
+    border-radius: 20px;
+
+  }
+
+
+  .login-card {
+
+    padding:
+      30px 20px;
+
+  }
+
+}
+
+/* =========================
+   TOMBOL LOGOUT KASIR
+========================= */
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #ffffff;
+    color: #f57c00;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 10px 18px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.25s ease;
+}
+
+.logout-icon {
+    font-size: 19px;
+    font-weight: bold;
+    transition: transform 0.25s ease;
+}
+
+/* Saat mouse diarahkan */
+.logout-btn:hover {
+    background: #fff3e0;
+    color: #e65100;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.logout-btn:hover .logout-icon {
+    transform: translateX(3px);
+}
+
+/* Saat tombol ditekan */
+.logout-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.12);
 }
